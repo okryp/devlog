@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jrasb Devlog</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="wrapper">
+        <section id="Intro">
+            <h1>Welcome to my personal devlog</h1>
+            <h2>O. Krypczyk</h2>
+            <p>
+                This website is dedicated to my programming journey with different programming languages,
+                paradigms, and other ideas.
+            </p>
+        </section>
+        <br>
+        <section id="Haskell">
+            <h1>Haskell</h1>
+            <h2 id="day1">Friday, 11 Aug 2023</h2>
+            <p>
+                Wrote my first working haskell program. It's a simple program that takes an integer input from the user,
+                and checks if it is the same forwards as it is reversed. A "palindrome check" so to speak.
+                <br>
+                The program asks the user for an input, and returns the number reversed and True/False based on if it's a
+                palindrome or not.<br>
+                <br>
+                <code>
+                    reverseInt :: Integer -> Integer<br>
+                    reverseInt = read . reverse. show<br>
+                    <br>
+                    compareInt :: Integer -> Integer -> Bool<br>
+                    compareInt x rx = x == rx<br>
+                    <br>
+                    main :: IO()<br>
+                    main = do<br>
+                    putStrLn "Hello! Input integer: "<br>
+                    input <- getLine<br>
+                    let i = read input :: Integer<br>
+                    putStr (show (reverseInt i))<br>
+                    <br>
+                    putStrLn "\nIs it the same?"<br>
+                    putStr (show (compareInt i (reverseInt i)))<br>
+                </code>
+                <br>
+                If you enter the number 121, it will put in stdout "121" and "True" as it is the same forwards and backwards.
+                However if you were to enter a number such as 123, it would return "321" and "False" as it is not the same. 
+            </p>
+        </section>
+    </div>
+</body>
+</html>
