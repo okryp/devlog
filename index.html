@@ -9,8 +9,8 @@
 <body>
     <div id="wrapper">
         <section id="Intro">
-            <h1>Welcome to my personal devlog</h1>
-            <h2>O. Krypczyk</h2>
+            <h1 class="center-text">Welcome to my personal devlog</h1>
+            <h2 class="center-text">O. Krypczyk</h2>
             <p>
                 This website is dedicated to my programming journey with different programming languages,
                 paradigms, and other ideas.
@@ -27,26 +27,53 @@
                 The program asks the user for an input, and returns the number reversed and True/False based on if it's a
                 palindrome or not.<br>
                 <br>
-                <code>
-                    reverseInt :: Integer -> Integer<br>
-                    reverseInt = read . reverse. show<br>
-                    <br>
-                    compareInt :: Integer -> Integer -> Bool<br>
-                    compareInt x rx = x == rx<br>
-                    <br>
-                    main :: IO()<br>
-                    main = do<br>
-                    putStrLn "Hello! Input integer: "<br>
-                    input <- getLine<br>
-                    let i = read input :: Integer<br>
-                    putStr (show (reverseInt i))<br>
-                    <br>
-                    putStrLn "\nIs it the same?"<br>
-                    putStr (show (compareInt i (reverseInt i)))<br>
-                </code>
+                <div class="code-block">
+                    <code>
+                        reverseInt :: Integer -> Integer<br>
+                        reverseInt = read . reverse. show<br>
+                        <br>
+                        compareInt :: Integer -> Integer -> Bool<br>
+                        compareInt x rx = x == rx<br>
+                        <br>
+                        main :: IO()<br>
+                        main = do<br>
+                        putStrLn "Hello! Input integer: "<br>
+                        input <- getLine<br>
+                        let i = read input :: Integer<br>
+                        putStr (show (reverseInt i))<br>
+                        <br>
+                        putStrLn "\nIs it the same?"<br>
+                        putStr (show (compareInt i (reverseInt i)))<br>
+                    </code>    
+                </div>
                 <br>
                 If you enter the number 121, it will put in stdout "121" and "True" as it is the same forwards and backwards.
                 However if you were to enter a number such as 123, it would return "321" and "False" as it is not the same. 
+            </p>
+            <br>
+            <p>
+                After making the previous code i figured out how to combine the compareInt function with the reverseInt function
+                <br>
+                <br>
+                <div class="code-block">
+                    <code>
+                        -- Palindrome Check v2 ---<br>
+                        palindromeCheck :: Integer -> Bool<br>
+                        palindromeCheck x = x == (read.reverse.show) x<br>
+                        <br>
+                        main :: IO()<br>
+                        main = do<br>
+                            putStrLn "Hello again! Input integer to check"<br>
+                            input <- getLine<br>
+                            let inputInt = read input :: Integer<br>
+                            <br>
+                            putStr (show (palindromeCheck inputInt))<br>
+                    </code>    
+                </div>
+                <br>
+                The code now takes the Integer provided by the user, and returns a boolean based on said input. The function
+                palindromeCheck takes the Integer and compares it with the reversed integer in a oneliner of combined functions
+                that are provided in base Haskell.
             </p>
         </section>
     </div>
