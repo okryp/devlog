@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Lisp Devlog</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="wrapper">
+        <section id="Intro">
+            <h1 class="center-text">Welcome to my personal devlog</h1>
+            <h2 class="center-text">O. Krypczyk</h2>
+            <p>
+                This website is dedicated to my programming journey with different programming languages,
+                paradigms, and other ideas.
+            </p>
+            <a href="./haskell.html">Haskell</a>
+            <a href="./commonlisp.html">Common Lisp</a>
+        </section>
+        <br>
+        <section id="Common-Lisp">
+            <h1>Common Lisp</h1>
+            <h2>Saturday, 26 Aug 2023</h2>
+            <p>
+                Decided to check out what the fuss was about with the lisp family of languages. For this I decided to go
+                with Common Lisp as it seems to be the closest thing to bare bones lisp. I've heard that clojure is the 
+                most popular out of the lisp family, but i have no intention of working with the JVM.
+                <br>
+                The first proper function i've written is a recursive factorial function. It returns the factorial of 
+                the value entered. No error handling as i still have to figure that out.
+                <br><br>
+                <div class="code-block">
+                    <code>
+                        (defun factorial (n)<br>
+                            (if (<= n 1)<br>
+                                  1<br>
+                                (* n (factorial (- n 1)))<br>
+                              )<br>
+                          )<br>
+                    </code>
+                </div>
+                <br>
+                The most interesting part of writing lisp code is that the operator comes first in a statement such as 
+                2 + 2. This would be written (+ 2 2). This is because lisp interprets everything between parentheses as 
+                a list, and interprets lists with an operator in the front as a function. This means that you can add 
+                all items in a list like this (+ 1 2 3) => 6.
+                <br>
+                I look forward to experiment more in this ancient language.
+            </p>
+        </section>
+    </div>
+</body>
+</html>

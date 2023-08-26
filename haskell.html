@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haskell</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="wrapper">
+        <section id="Intro">
+            <h1 class="center-text">Welcome to my personal devlog</h1>
+            <h2 class="center-text">O. Krypczyk</h2>
+            <p>
+                This website is dedicated to my programming journey with different programming languages,
+                paradigms, and other ideas.
+            </p>
+        </section>
+        <br>
+        <section id="Haskell">
+            <h1>Haskell</h1>
+            <h2 id="day1">Friday, 11 Aug 2023</h2>
+            <p>
+                Wrote my first working haskell program. It's a simple program that takes an integer input from the user,
+                and checks if it is the same forwards as it is reversed. A "palindrome check" so to speak.
+                <br>
+                The program asks the user for an input, and returns the number reversed and True/False based on if it's a
+                palindrome or not.
+                <br><br>
+                <div class="code-block">
+                    <code>
+                        reverseInt :: Integer -> Integer<br>
+                        reverseInt = read . reverse. show<br>
+                        <br>
+                        compareInt :: Integer -> Integer -> Bool<br>
+                        compareInt x rx = x == rx<br>
+                        <br>
+                        main :: IO()<br>
+                        main = do<br>
+                        putStrLn "Hello! Input integer: "<br>
+                        input <- getLine<br>
+                        let i = read input :: Integer<br>
+                        putStr (show (reverseInt i))<br>
+                        <br>
+                        putStrLn "\nIs it the same?"<br>
+                        putStr (show (compareInt i (reverseInt i)))<br>
+                    </code>    
+                </div>
+                <br>
+                If you enter the number 121, it will put in stdout "121" and "True" as it is the same forwards and backwards.
+                However if you were to enter a number such as 123, it would return "321" and "False" as it is not the same. 
+            </p>
+            <br>
+            <p>
+                After making the previous code i figured out how to combine the compareInt function with the reverseInt function
+                <br><br>
+                <div class="code-block">
+                    <code>
+                        -- Palindrome Check v2 ---<br>
+                        palindromeCheck :: Integer -> Bool<br>
+                        palindromeCheck x = x == (read.reverse.show) x<br>
+                        <br>
+                        main :: IO()<br>
+                        main = do<br>
+                            putStrLn "Hello again! Input integer to check"<br>
+                            input <- getLine<br>
+                            let inputInt = read input :: Integer<br>
+                            <br>
+                            putStr (show (palindromeCheck inputInt))<br>
+                    </code>    
+                </div>
+                <br>
+                The code now takes the Integer provided by the user, and returns a boolean based on said input. The function
+                palindromeCheck takes the Integer and compares it with the reversed integer in a oneliner of combined functions
+                that are provided in base Haskell.
+            </p>
+            <br>
+            <p>
+                <h3>Learning, not by "trial by fire"</h3>
+                Continuing my work in Haskell, i have decided to follow along with a youtube guide for imperative programmers
+                made by Phillipp Hagenlocher. I have reached episode 5 where he tasks the viewer with completing a series
+                of exercises with lists.
+                <br>
+                I have completed the first of these exercises with some help to the notes i've been taking along with watching
+                the playlist.
+                <br><br>
+                <div class="code-block">
+                    <code>
+                        -- Create a function "elem" tat returns True if an element is in a given list<br> 
+                        -- and returns False otherwise<br>
+                        elem :: (Eq a) => a -> [a] -> Bool<br>
+                        elem _ [] = False<br>
+                        elem x xs<br>
+                            | x == last xs = True<br>
+                            | otherwise    = elem x (init xs)<br>
+                    </code>
+                </div>
+                <br>
+                The function types have been provided by Phillip and contain something that will be explained in a later
+                episode in the series.
+                <br>
+                The code I have written takes 2 argumens: a variable, and an array of variables. If the array provided is
+                empty the function automatically returns False. If the function is not empty and the last element of the 
+                list is equal to the first argument provided, it returns true. Otherwise, the function recurses with the 
+                same initial arguments, however the last item in the list has been removed by the init function which is 
+                built in Haskell and has been explained in a previous episode of the series. 
+                <br><br>
+                The following exercise was a function that removed any duplicate numbers out of a given list.
+                <br><br>
+                <div class="code-block">
+                    <code>
+                        -- Create a function "nub" that removes all duplicates from a given list<br>
+                        nub :: (Eq a) => [a] -> [a]<br>
+                        nub [] = []<br>
+                        nub (x:xs)<br>
+                            | elem x xs = nub xs<br>
+                            | otherwise   = x : nub xs<br>
+                    </code>
+                </div>
+                <br>
+                This function returns an empty array if the array put in is an empty array. Otherwise, It makes use of 
+                the elem function described above tho check if the element is in the array, if not, it gets appended to 
+                the new list, otherwise the list without it gets run through the function again.  
+                <br><br>
+                The following exercise is a function that checks if the list provided goes in ascending order.
+                <br><br>
+                <div class="code-block">
+                    <code>
+                        -- Create a function isAsc that returns True if the list given to it is a list<br> 
+                        -- of ascending order<br>
+                        isAsc :: [Int] -> Bool<br>
+                        isAsc [] = True<br>
+                        isAsc (x:xs)<br>
+                            | null xs = True<br>
+                            | x <= head xs = isAsc xs<br>
+                            | otherwise = False<br>
+                    </code>
+                </div>
+                <br>
+                This function goes through the list checking if the current element is smaller or equal to the next 
+                element (accessed by checking the head of the rest of the list). If it is smaller than the following 
+                number, the function continues to iterate over and over until the list is empty and returns True. If a 
+                number is found that is larger than the following, it returns false as it is no longer in ascending 
+                order.
+                <br>
+                The exercise solution is a bit of a dirty trick pulled by the creator, using a technique that has not 
+                been discussed yet. The solution shows that you can have multiple elements in the (x:xs) notation, as 
+                long as there are enough items in the list to support it, or that in case there are less, a different 
+                guard covers it. In the solution the creator used<br>isAsc (x:y:xs) = (x <= y) && (y:xs)<br>which 
+                results in the list getting shorter and shorter until it reaches the length of one element which returns
+                True.
+                <br><br>
+                The last exercise of the episode is one that concerns directed graphs displayed in 2 integer tuples. The
+                exercise asks to create a function that takes an list of these tuples, and 2 integers as nodes which it
+                then uses to check if they are connected from node 1 to node 2 with the help of the tuple list.
+                <br><br>
+                <div class="code-block">
+                    <code>
+                        -- Create a function hasPath that determines if a path from one node to another<br>
+                        -- exists withit a directed graph<br>
+                        hasPath :: [(Int, Int)] -> Int -> Int -> Bool<br>
+                        hasPath xs x y<br>
+                            | x == y = True<br>
+                            | x > y && elem1 (x, x-1) xs= hasPath xs (x-1) y<br>
+                            | x < y && elem1 (x, x+1) xs= hasPath xs (x+1) y<br>
+                            | otherwise = False<br>
+                    </code>
+                </div>
+                <br>
+                The function takes the list of tuples and 2 other integers, and goes node by node checking if there is a
+                valid further node to go to. If said node exists, go to that node until x is equal to y which means the 
+                path is valid. If the further node doesn't exist, the path is impossibe, and returns False 
+            </p>
+        </section>
+    </div>
+</body>
+</html>
